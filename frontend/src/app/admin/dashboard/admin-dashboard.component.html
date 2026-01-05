@@ -1,0 +1,121 @@
+<div class="admin-page">
+
+  <h2 class="page-title">Admin Dashboard</h2>
+
+  <!-- Filters -->
+  <div class="filters">
+    <select [(ngModel)]="selectedDepartment">
+      <option value="">All Departments</option>
+      <option *ngFor="let dept of departments" [value]="dept">
+        {{ dept }}
+      </option>
+    </select>
+
+    <select [(ngModel)]="selectedMonth">
+      <option value="">All Months</option>
+      <option *ngFor="let m of months" [value]="m.value">
+        {{ m.label }}
+      </option>
+    </select>
+
+    <select [(ngModel)]="selectedYear">
+      <option value="">All Years</option>
+      <option *ngFor="let y of years" [value]="y">
+        {{ y }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrapper" *ngIf="filteredEmployees().length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Month</th>
+          <th>Year</th>
+          <th>Department</th>
+          <th>Working Days</th>
+          <th>Availability %</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let emp of filteredEmployees(); let i = index">
+
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ getMonthName(emp.month) }}</td>
+          <td>{{ getYear(emp.month) }}</td>
+
+          <!-- Department -->
+          <td>
+            <ng-container *ngIf="editingEmployee !== emp">
+              {{ emp.department }}
+            </ng-container>
+
+            <ng-container *ngIf="editingEmployee === emp">
+              <select [(ngModel)]="editModel.department">
+                <option *ngFor="let dept of departments" [value]="dept">
+                  {{ dept }}
+                </option>
+              </select>
+            </ng-container>
+          </td>
+
+          <!-- Working Days -->
+          <td>
+            <ng-container *ngIf="editingEmployee !== emp">
+              {{ emp.workingDays }} / {{ getDaysInMonth(emp.month) }}
+            </ng-container>
+
+            <ng-container *ngIf="editingEmployee === emp">
+              <input
+                type="number"
+                min="1"
+                [max]="getDaysInMonth(emp.month)"
+                [(ngModel)]="editModel.workingDays"
+                class="days-input"
+              />
+              / {{ getDaysInMonth(emp.month) }}
+            </ng-container>
+          </td>
+
+          <td>{{ availabilityPercent(emp) }}%</td>
+
+          <!-- Actions -->
+          <td class="actions">
+            <button *ngIf="editingEmployee !== emp" (click)="editEmployee(emp)">
+              Edit
+            </button>
+
+            <button *ngIf="editingEmployee === emp" (click)="saveEmployee()" class="save">
+              Save
+            </button>
+
+            <button *ngIf="editingEmployee === emp" (click)="cancelEdit()" class="cancel">
+              Cancel
+            </button>
+
+            <button class="delete" (click)="deleteEmployee(i)">
+              Delete
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="no-data" *ngIf="filteredEmployees().length === 0">
+    No records found
+  </p>
+
+  <!-- Logout -->
+  <div class="logout-wrapper">
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+
+</div>
