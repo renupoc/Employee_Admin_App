@@ -1,16 +1,21 @@
-C:\Users\Kondapalli\Desktop\POC\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\entity\Employee.java
-C:\Users\Kondapalli\Desktop\POC\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\service\EmployeeService.java
-C:\Users\Kondapalli\Desktop\POC\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\controller\AuthController.java
-C:\Users\Kondapalli\Desktop\POC\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\dto\AttendanceRequest.java
-C:\Users\Kondapalli\Desktop\POC\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\service\AttendanceService.java
-C:\Users\Kondapalli\Desktop\POC\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\service\AuthService.java
-C:\Users\Kondapalli\Desktop\POC\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\controller\EmployeeController.java
-C:\Users\Kondapalli\Desktop\POC\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\controller\MonitoringController.java
-C:\Users\Kondapalli\Desktop\POC\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\AttendanceApplication.java
-C:\Users\Kondapalli\Desktop\POC\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\controller\AttendanceController.java
-C:\Users\Kondapalli\Desktop\POC\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\repository\AttendanceRepository.java
-C:\Users\Kondapalli\Desktop\POC\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\repository\EmployeeRepository.java
-C:\Users\Kondapalli\Desktop\POC\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\config\CorsConfig.java
-C:\Users\Kondapalli\Desktop\POC\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\dto\RegisterRequest.java
-C:\Users\Kondapalli\Desktop\POC\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\dto\LoginRequest.java
-C:\Users\Kondapalli\Desktop\POC\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\entity\Attendance.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\dto\AttendanceRequest.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\repository\AttendanceRepository.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\controller\AttendanceController.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\service\AdminService.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\service\AuthService.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\service\EmployeeService.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\controller\EmployeeController.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\dto\LoginRequest.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\entity\Employee.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\repository\EmployeeRepository.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\config\CorsConfig.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\entity\Attendance.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\config\WebConfig.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\AttendanceApplication.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\dto\RegisterRequest.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\controller\AuthController.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\dto\AttendanceSummaryDTO.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\controller\AdminController.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\service\AttendanceService.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\config\SecurityConfig.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\controller\MonitoringController.java

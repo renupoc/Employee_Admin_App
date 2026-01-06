@@ -44,6 +44,7 @@ export class EmployeeDashboardComponent implements OnInit {
 
   // ✅ SINGLE ngOnInit (FIXED)
   ngOnInit(): void {
+    
     this.generateYears();
 
     // ✅ 1. Load from localStorage

@@ -1,32 +1,62 @@
 package com.example.attendance.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "attendance")
+@Table(
+    name = "attendance",
+    uniqueConstraints = @UniqueConstraint(
+        columnNames = {"employee_id", "attendance_date"}
+    )
+)
 public class Attendance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String month;
-    private int workingDays;
-
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    // Getters & Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    @Column(name = "attendance_date")
+    private LocalDate attendanceDate;
 
-    public String getMonth() { return month; }
-    public void setMonth(String month) { this.month = month; }
+    private String status;
 
-    public int getWorkingDays() { return workingDays; }
-    public void setWorkingDays(int workingDays) { this.workingDays = workingDays; }
+    // ✅ GETTERS & SETTERS
 
-    public Employee getEmployee() { return employee; }
-    public void setEmployee(Employee employee) { this.employee = employee; }
+    public Long getId() {
+        return id;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public LocalDate getAttendanceDate() {
+        return attendanceDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public void setAttendanceDate(LocalDate attendanceDate) {
+        this.attendanceDate = attendanceDate;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

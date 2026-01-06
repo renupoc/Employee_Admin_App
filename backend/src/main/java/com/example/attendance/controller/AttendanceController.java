@@ -1,10 +1,8 @@
 package com.example.attendance.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.attendance.dto.AttendanceRequest;
 import com.example.attendance.entity.Attendance;
 import com.example.attendance.entity.Employee;
 import com.example.attendance.repository.AttendanceRepository;
@@ -12,25 +10,34 @@ import com.example.attendance.repository.EmployeeRepository;
 
 @RestController
 @RequestMapping("/api/attendance")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 public class AttendanceController {
 
-    @Autowired
-    private AttendanceRepository attendanceRepo;
+    private final AttendanceRepository attendanceRepo;
+    private final EmployeeRepository employeeRepo;
 
-    @Autowired
-    private EmployeeRepository employeeRepo;
-
-    @PostMapping
-    public Attendance save(@RequestBody Attendance att) {
-        Employee emp = employeeRepo.findById(att.getEmployee().getId())
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
-        att.setEmployee(emp);
-        return attendanceRepo.save(att);
+    public AttendanceController(
+            AttendanceRepository attendanceRepo,
+            EmployeeRepository employeeRepo) {
+        this.attendanceRepo = attendanceRepo;
+        this.employeeRepo = employeeRepo;
     }
 
-    @GetMapping
-    public List<Attendance> getAll() {
-        return attendanceRepo.findAll();
+    @PostMapping("/{employeeId}")
+    public void markAttendance(
+            @PathVariable Long employeeId,
+            @RequestBody AttendanceRequest req) {
+
+        Employee emp = employeeRepo.findById(employeeId).orElseThrow();
+
+        Attendance attendance = attendanceRepo
+                .findByEmployeeAndAttendanceDate(emp, req.date)
+                .orElse(new Attendance());
+
+        attendance.setEmployee(emp);
+        attendance.setAttendanceDate(req.date);
+        attendance.setStatus(req.status);
+
+        attendanceRepo.save(attendance);
     }
 }
