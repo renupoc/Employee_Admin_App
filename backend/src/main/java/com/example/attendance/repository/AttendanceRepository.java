@@ -1,8 +1,8 @@
 package com.example.attendance.repository;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalDate;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,22 +10,36 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.attendance.entity.Attendance;
 import com.example.attendance.entity.Employee;
+import com.example.attendance.dto.AdminAttendanceDTO;
 
-public interface AttendanceRepository
-        extends JpaRepository<Attendance, Long> {
+public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
 
-    Optional<Attendance> findByEmployeeAndAttendanceDate(
-            Employee employee, LocalDate date);
-
+    // -------------------------------
+    // EMPLOYEE DASHBOARD
+    // -------------------------------
+    Optional<Attendance> findByEmployeeIdAndMonthAndYear(
+        Long employeeId,
+        int month,
+        int year
+);
+    // -------------------------------
+    // ADMIN DASHBOARD
+    // -------------------------------
     @Query("""
-        SELECT a FROM Attendance a
-        WHERE a.employee.id = :empId
-          AND a.attendanceDate BETWEEN :start AND :end
-          AND FUNCTION('DAYOFWEEK', a.attendanceDate) NOT IN (1,7)
+        SELECT new com.example.attendance.dto.AdminAttendanceDTO(
+            a.id,
+            e.fullName,
+            e.email,
+            e.department,
+            a.month,
+            a.year,
+            a.workingDays,
+            a.totalWorkingDays,
+            a.availabilityPercentage
+        )
+        FROM Attendance a
+        JOIN a.employee e
+        ORDER BY a.createdAt DESC
     """)
-    List<Attendance> findWeekdaysAttendance(
-            @Param("empId") Long empId,
-            @Param("start") LocalDate start,
-            @Param("end") LocalDate end
-    );
+    List<AdminAttendanceDTO> findAllForAdmin();
 }

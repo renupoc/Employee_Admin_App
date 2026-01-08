@@ -1,15 +1,10 @@
 package com.example.attendance.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.example.attendance.dto.AttendanceSummaryDTO;
+import com.example.attendance.dto.AdminAttendanceDTO;
 import com.example.attendance.service.AdminService;
 
 @RestController
@@ -23,14 +18,8 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @GetMapping("/weekly-summary")
-    public List<AttendanceSummaryDTO> weeklySummary(
-            @RequestParam String startDate,
-            @RequestParam String endDate) {
-
-        return adminService.weeklySummary(
-                LocalDate.parse(startDate),
-                LocalDate.parse(endDate)
-        );
+    @GetMapping("/attendance")
+    public List<AdminAttendanceDTO> getAllAttendance() {
+        return adminService.getAllAttendance();
     }
 }

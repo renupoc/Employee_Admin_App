@@ -1,23 +1,33 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class EmployeeService {
 
-  private API = 'http://localhost:8080/api/employees';
+  private baseUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {}
 
-  // ✅ Fetch employee from DB
-  getByEmail(email: string): Observable<any> {
-    return this.http.get(`${this.API}/by-email/${email}`);
+  // ✅ GET employee by email (used after refresh)
+  getByEmail(email: string) {
+    return this.http.get<any>(
+      `${this.baseUrl}/employees/by-email?email=${email}`
+    );
   }
 
-  // ✅ Update department in DB
-  updateDepartment(id: number, department: string): Observable<any> {
-    return this.http.put(`${this.API}/${id}/department`, { department });
+  // ✅ UPDATE department
+  updateDepartment(employeeId: number, department: string) {
+    return this.http.put<any>(
+      `${this.baseUrl}/employees/${employeeId}/department`,
+      { department }
+    );
+  }
+
+  // ✅ SUBMIT attendance
+  submitAttendance(payload: any) {
+    return this.http.post(
+      `${this.baseUrl}/attendance/${payload.employeeId}`,
+      payload
+    );
   }
 }

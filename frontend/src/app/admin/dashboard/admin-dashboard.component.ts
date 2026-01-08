@@ -1,158 +1,63 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { AdminAttendance } from '../models/admin-attendance.model';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.css']
+  templateUrl: './admin-dashboard.component.html'
 })
 export class AdminDashboardComponent implements OnInit {
 
-  // Raw list from localStorage
-  employees: any[] = [];
+  employees: AdminAttendance[] = [];
 
-  // Filters
-  selectedDepartment: string = '';
+  selectedDepartment = '';
   selectedMonth: number | '' = '';
   selectedYear: number | '' = '';
 
-  // Dropdown data
   departments: string[] = [];
   years: number[] = [];
 
   months = [
-    { label: 'Jan', value: 1 },
-    { label: 'Feb', value: 2 },
-    { label: 'Mar', value: 3 },
-    { label: 'Apr', value: 4 },
-    { label: 'May', value: 5 },
-    { label: 'Jun', value: 6 },
-    { label: 'Jul', value: 7 },
-    { label: 'Aug', value: 8 },
-    { label: 'Sep', value: 9 },
-    { label: 'Oct', value: 10 },
-    { label: 'Nov', value: 11 },
-    { label: 'Dec', value: 12 }
+    { label: 'Jan', value: 1 }, { label: 'Feb', value: 2 },
+    { label: 'Mar', value: 3 }, { label: 'Apr', value: 4 },
+    { label: 'May', value: 5 }, { label: 'Jun', value: 6 },
+    { label: 'Jul', value: 7 }, { label: 'Aug', value: 8 },
+    { label: 'Sep', value: 9 }, { label: 'Oct', value: 10 },
+    { label: 'Nov', value: 11 }, { label: 'Dec', value: 12 }
   ];
 
-  // Editing
-  editingEmployee: any = null;
-  editModel: any = {
-    department: '',
-    workingDays: 0
-  };
+  constructor(private http: HttpClient) {}
 
-  ngOnInit() {
-    this.loadEmployees();
+  ngOnInit(): void {
+    this.loadAttendance();
   }
 
-  // -------------------------
-  // LOAD DATA
-  // -------------------------
-  loadEmployees() {
-    const data = localStorage.getItem('employeeAvailabilityList');
-    this.employees = data ? JSON.parse(data) : [];
-
-    // Build unique departments & years
-    this.departments = [...new Set(this.employees.map(e => e.department))];
-
-    this.years = [
-      ...new Set(
-        this.employees.map(e => Number(e.month.split('-')[0]))
-      )
-    ];
+  loadAttendance() {
+    this.http
+      .get<AdminAttendance[]>('http://localhost:8080/api/admin/attendance')
+      .subscribe((res: AdminAttendance[]) => {
+        this.employees = res;
+        this.departments = [...new Set(res.map(e => e.department))];
+        this.years = [...new Set(res.map(e => e.year))];
+      });
   }
 
-  // -------------------------
-  // FILTERED LIST (USED IN HTML)
-  // -------------------------
   filteredEmployees() {
-    return this.employees.filter(emp => {
-      const [year, month] = emp.month.split('-').map(Number);
-
-      return (
-        (!this.selectedDepartment || emp.department === this.selectedDepartment) &&
-        (!this.selectedMonth || month === this.selectedMonth) &&
-        (!this.selectedYear || year === this.selectedYear)
-      );
-    });
+    return this.employees.filter(e =>
+      (!this.selectedDepartment || e.department === this.selectedDepartment) &&
+      (!this.selectedMonth || e.month === this.selectedMonth) &&
+      (!this.selectedYear || e.year === this.selectedYear)
+    );
   }
 
-  // -------------------------
-  // DATE HELPERS
-  // -------------------------
-  getMonthName(monthKey: string) {
-    const month = Number(monthKey.split('-')[1]);
+  getMonthName(month: number) {
     return this.months.find(m => m.value === month)?.label || '';
   }
 
-  getYear(monthKey: string) {
-    return Number(monthKey.split('-')[0]);
-  }
-
-  getDaysInMonth(monthKey: string) {
-    const [year, month] = monthKey.split('-').map(Number);
-    return new Date(year, month, 0).getDate();
-  }
-
-  // -------------------------
-  // CALCULATIONS
-  // -------------------------
-  availabilityPercent(emp: any) {
-    const totalDays = this.getDaysInMonth(emp.month);
-    return Math.round((emp.workingDays / totalDays) * 100);
-  }
-
-  // -------------------------
-  // EDIT / SAVE / CANCEL
-  // -------------------------
-  editEmployee(emp: any) {
-    this.editingEmployee = emp;
-    this.editModel = {
-      department: emp.department,
-      workingDays: emp.workingDays
-    };
-  }
-
-  saveEmployee() {
-    if (!this.editingEmployee) return;
-
-    this.editingEmployee.department = this.editModel.department;
-    this.editingEmployee.workingDays = this.editModel.workingDays;
-
-    localStorage.setItem(
-      'employeeAvailabilityList',
-      JSON.stringify(this.employees)
-    );
-
-    this.cancelEdit();
-  }
-
-  cancelEdit() {
-    this.editingEmployee = null;
-    this.editModel = { department: '', workingDays: 0 };
-  }
-
-  // -------------------------
-  // DELETE
-  // -------------------------
-  deleteEmployee(index: number) {
-    if (!confirm('Are you sure you want to delete this record?')) return;
-
-    this.employees.splice(index, 1);
-
-    localStorage.setItem(
-      'employeeAvailabilityList',
-      JSON.stringify(this.employees)
-    );
-  }
-
-  // -------------------------
-  // LOGOUT
-  // -------------------------
   logout() {
     localStorage.clear();
     window.location.href = '/login';

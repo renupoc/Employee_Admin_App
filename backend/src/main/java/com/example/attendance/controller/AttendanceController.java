@@ -2,7 +2,6 @@ package com.example.attendance.controller;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.example.attendance.dto.AttendanceRequest;
 import com.example.attendance.entity.Attendance;
 import com.example.attendance.entity.Employee;
 import com.example.attendance.repository.AttendanceRepository;
@@ -23,21 +22,35 @@ public class AttendanceController {
         this.employeeRepo = employeeRepo;
     }
 
-    @PostMapping("/{employeeId}")
-    public void markAttendance(
+    // EMPLOYEE DASHBOARD SUBMIT
+    @PostMapping("/submit/{employeeId}")
+    public Attendance submitAttendance(
             @PathVariable Long employeeId,
-            @RequestBody AttendanceRequest req) {
+            @RequestBody Attendance request) {
 
-        Employee emp = employeeRepo.findById(employeeId).orElseThrow();
+        Employee emp = employeeRepo.findById(employeeId)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
 
+        // Check if already exists for month + year
         Attendance attendance = attendanceRepo
-                .findByEmployeeAndAttendanceDate(emp, req.date)
+                .findByEmployeeIdAndMonthAndYear(
+                        employeeId,
+                        request.getMonth(),
+                        request.getYear()
+                )
                 .orElse(new Attendance());
 
         attendance.setEmployee(emp);
-        attendance.setAttendanceDate(req.date);
-        attendance.setStatus(req.status);
+        attendance.setMonth(request.getMonth());
+        attendance.setYear(request.getYear());
+        attendance.setWorkingDays(request.getWorkingDays());
+        attendance.setTotalWorkingDays(request.getTotalWorkingDays());
 
-        attendanceRepo.save(attendance);
+        // Calculate percentage
+        double percentage =
+                (request.getWorkingDays() * 100.0) / request.getTotalWorkingDays();
+        attendance.setAvailabilityPercentage(percentage);
+
+        return attendanceRepo.save(attendance);
     }
 }

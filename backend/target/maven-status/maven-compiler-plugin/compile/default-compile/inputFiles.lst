@@ -7,6 +7,7 @@ C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_
 C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\controller\EmployeeController.java
 C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\dto\LoginRequest.java
 C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\entity\Employee.java
+C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\dto\AdminAttendanceDTO.java
 C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\repository\EmployeeRepository.java
 C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\config\CorsConfig.java
 C:\Users\LENOVO\Downloads\EMPLOYEE_AVAILABILITY_APP Jan 2\EMPLOYEE_AVAILABILITY_APP\backend\src\main\java\com\example\attendance\entity\Attendance.java

@@ -125,8 +125,17 @@ export class EmployeeDashboardComponent implements OnInit {
   }
 
   submit() {
-    alert('Availability submitted (API call goes here)');
-  }
+  const payload = {
+    employeeId: this.user.id,
+    month: this.selectedMonth,
+    year: this.selectedYear,
+    workingDays: this.workingDays
+  };
+
+  this.employeeService.submitAttendance(payload).subscribe(() => {
+    alert('Attendance submitted successfully');
+  });
+}
 
   logout() {
     localStorage.clear();

@@ -19,3 +19,4 @@ com\example\attendance\service\AdminService.class
 com\example\attendance\controller\AdminController.class
 com\example\attendance\config\CorsConfig$1.class
 com\example\attendance\controller\AttendanceController.class
+com\example\attendance\dto\AdminAttendanceDTO.class
