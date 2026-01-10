@@ -1,0 +1,60 @@
+<div class="admin-container">
+
+  <!-- HEADER -->
+  <div class="admin-header">
+    <h2>Admin Dashboard</h2>
+
+    <div class="filters">
+      <select [(ngModel)]="selectedDepartment">
+        <option value="">All Departments</option>
+        <option *ngFor="let d of departments" [value]="d">{{ d }}</option>
+      </select>
+
+      <select [(ngModel)]="selectedMonth">
+        <option value="">All Months</option>
+        <option *ngFor="let m of months" [value]="m.value">{{ m.label }}</option>
+      </select>
+
+      <select [(ngModel)]="selectedYear">
+        <option value="">All Years</option>
+        <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Month</th>
+        <th>Year</th>
+        <th>Department</th>
+        <th>Working Days</th>
+        <th>Availability %</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let emp of filteredEmployees">
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.email }}</td>
+        <td>{{ emp.monthName }}</td>
+        <td>{{ emp.year }}</td>
+        <td>{{ emp.department }}</td>
+        <td>{{ emp.workingDays }} / {{ emp.totalDays }}</td>
+        <td>{{ emp.percentage }}%</td>
+        <td>
+          <button class="btn edit" (click)="edit(emp)">Edit</button>
+          <button class="btn delete" (click)="delete(emp)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- LOGOUT -->
+  <button class="logout-btn" (click)="logout()">Logout</button>
+  
+</div>

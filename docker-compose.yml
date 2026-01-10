@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  backend:
+    image: ghcr.io/<username>/employee-backend:latest
+    ports:
+      - "8080:8080"
+
+  frontend:
+    image: ghcr.io/<username>/employee-frontend:latest
+    ports:
+      - "80:80"
